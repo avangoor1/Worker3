@@ -104,4 +104,4 @@ def blockTime(date, timevalue):
 
 
 if __name__ == "__main__":
-    blockTime("05/23/2025", "5:00pm")
+    blockTime("05/23/2025", "1:00pm")
