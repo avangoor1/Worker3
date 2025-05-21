@@ -128,7 +128,7 @@ def blockTime(date, timevalue):
     wait = WebDriverWait(driver, 10)  # Wait up to 10 seconds
     search_link = wait.until(EC.element_to_be_clickable((By.ID, "reserve-court-search")))
     now = datetime.datetime.now().time()
-    target_time = datetime.time(22, 7, 0)
+    target_time = datetime.time(22, 8, 0)
 
     while True:
         now = datetime.datetime.now().time()
