@@ -132,7 +132,7 @@ def blockTime(date, timevalue):
         if now >= target_time:
             search_link.click()
             break
-        time.sleep(0.5)  # Check every half second
+        time.sleep(0.01)  # Check every half second
 
     try:
         wait = WebDriverWait(driver, 10)  # Wait up to 10 seconds
