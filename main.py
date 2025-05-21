@@ -9,6 +9,52 @@ from selenium.common.exceptions import TimeoutException
 import time
 import datetime
 
+def force_label_class_to_active(driver, input_id):
+    """
+    Force a label to stay in active class by disabling event listeners
+    """
+    try:
+        # Find the input element by ID
+        input_element = driver.find_element(By.ID, input_id)
+        
+        # More aggressive approach to force the active class and prevent default behaviors
+        script = """
+        var input = arguments[0];
+        var span = input.parentElement;
+        var label = span.parentElement;
+        
+        if (label.tagName.toLowerCase() === 'label') {
+            // Clone the node to remove event listeners
+            var oldLabel = label;
+            var newLabel = oldLabel.cloneNode(true);
+            newLabel.className = 'active';
+            
+            // Replace old label with new one
+            oldLabel.parentNode.replaceChild(newLabel, oldLabel);
+            
+            // Find the input in the new structure and simulate a click
+            var newInput = newLabel.querySelector('input');
+            if (newInput) {
+                newInput.checked = true;
+            }
+            
+            return true;
+        }
+        return false;
+        """
+        
+        result = driver.execute_script(script, input_element)
+        
+        if result:
+            print(f"Successfully forced label active state for input with ID: {input_id}")
+        else:
+            print(f"Could not find a label parent for input with ID: {input_id}")
+            
+        return result
+    except Exception as e:
+        print(f"Failed to force label class: {str(e)}")
+        return False
+
 def blockTime(date, timevalue):
 
     options = Options()
@@ -60,7 +106,7 @@ def blockTime(date, timevalue):
     location_link.click()
 
     wait = WebDriverWait(driver, 10)  # Wait up to 10 seconds
-    gym_link = wait.until(EC.element_to_be_clickable((By.XPATH, "//li[contains(text(), 'Badminton')]")))
+    gym_link = wait.until(EC.element_to_be_clickable((By.XPATH, "//li[contains(text(), 'Racquetball')]")))
     gym_link.click()
 
     time.sleep(2)
@@ -73,6 +119,8 @@ def blockTime(date, timevalue):
     date_input.send_keys(date)
 
     time.sleep(2)
+
+    force_label_class_to_active(driver, "interval-90")
 
     wait = WebDriverWait(driver, 10)  # Wait up to 10 seconds
     search_link = wait.until(EC.element_to_be_clickable((By.ID, "reserve-court-search")))
@@ -104,4 +152,4 @@ def blockTime(date, timevalue):
 
 
 if __name__ == "__main__":
-    blockTime("05/28/2025", "5:00pm")
+    blockTime("05/28/2025", "6:00pm")
