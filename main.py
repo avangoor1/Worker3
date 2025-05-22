@@ -9,8 +9,7 @@ from selenium.common.exceptions import TimeoutException
 import time
 import datetime
 
-def take_screenshot(driver, name):
-    driver.save_screenshot(f"{name}.png")
+
 
 def force_label_class_to_active(driver, input_id):
     """
@@ -81,7 +80,7 @@ def blockTime(date, timevalue):
 
     input_login = driver.find_element(By.ID, "login")
 
-    input_login.send_keys("raghu2007")
+    input_login.send_keys("avangoor")
 
     input_password = driver.find_element(By.ID, "password")
 
@@ -128,7 +127,7 @@ def blockTime(date, timevalue):
     wait = WebDriverWait(driver, 10)  # Wait up to 10 seconds
     search_link = wait.until(EC.element_to_be_clickable((By.ID, "reserve-court-search")))
     now = datetime.datetime.now().time()
-    target_time = datetime.time(22, 11, 0)
+    target_time = datetime.time(22, 27, 0)
 
     while True:
         now = datetime.datetime.now().time()
@@ -146,7 +145,7 @@ def blockTime(date, timevalue):
         confirm_link.click()
         time.sleep(2)
         print("Booked court")
-        take_screenshot(driver, "after_confirm")
+
     except TimeoutException:
             print("Not found")
 
