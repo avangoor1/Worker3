@@ -122,7 +122,7 @@ def blockTime(date, timevalue):
 
     time.sleep(2)
 
-    force_label_class_to_active(driver, "interval-90")
+    # force_label_class_to_active(driver, "interval-90")
 
     wait = WebDriverWait(driver, 10)  # Wait up to 10 seconds
     search_link = wait.until(EC.element_to_be_clickable((By.ID, "reserve-court-search")))
@@ -155,4 +155,4 @@ def blockTime(date, timevalue):
 
 
 if __name__ == "__main__":
-    blockTime("06/02/2025", "4:30pm")
+    blockTime("06/04/2025", "5:30pm")
