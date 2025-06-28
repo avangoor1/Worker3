@@ -64,7 +64,7 @@ def blockTime(date, timevalue):
     options.add_argument("user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36")
     options.add_argument("--incognito")
     options.add_argument("window-size=1200x600")
-    options.add_argument('--headless') # whether you can see the program or not
+    #options.add_argument('--headless') # whether you can see the program or not
     options.add_argument('--disable-gpu')
     options.add_argument('--no-sandbox')  # Optional but often needed
 
@@ -155,4 +155,4 @@ def blockTime(date, timevalue):
 
 
 if __name__ == "__main__":
-    blockTime("06/20/2025", "5:30pm")
+    blockTime("07/07/2025", "5:30pm")
